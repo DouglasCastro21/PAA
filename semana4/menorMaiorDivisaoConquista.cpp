@@ -44,7 +44,7 @@ int main()
 
 
 
-    std::cout << "Vetor com o menor elemento: " << maiorElemento(elementos) << "\n";
+    std::cout << "Vetor com o maior elemento: " << maiorElemento(elementos) << "\n";
 
 
 }
