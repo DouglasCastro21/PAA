@@ -1,52 +1,50 @@
 //Algoritmo Busca Binária
 //divisão e conquista
-//complexidade 	O(log n)  , Array
-
+//complexidade 	O(log n) 
 
 #include <iostream>
+#include "vector"
 
+   
 
-using namespace std;
+int buscaBinaria(std::vector<int> &vetor, int esquerdo, int direito, int chave)
 
-int  main()
 {
-    int vector[20],tam,numPesquisado,pontoInical,pontoFinal;
-    int posicaoVector,saida,valor;
+    int meio = (esquerdo + direito) / 2; 
 
-    cout<<"Entre com o tamanho do vetor\t";
-    cin >> tam;
-    cout<<"\n Entre com os " << tam << " valores:\n";
-
-    for(int i=0; i < tam; i++)
+    if (esquerdo > direito) 
     {
-        cin >> vector[i];
+        return -1;
     }
-    cout<<"Entre com o valor a ser buscado:\t";
-    cin >> numPesquisado;
-    pontoInical=0;
-    pontoFinal= tam - 1;
-    saida=0;
 
-    while(pontoInical <= pontoFinal && saida == 0)
+    if (vetor[meio] == chave) 
     {
-        posicaoVector= (pontoInical + pontoFinal) / 2;
-        if(numPesquisado > vector[posicaoVector])
-        {
-            pontoInical= posicaoVector + 1;
-            valor= vector[posicaoVector];
-        }
-        else if(numPesquisado < vector[posicaoVector])
-        {
-            pontoFinal= posicaoVector - 1;
-            valor=vector[posicaoVector];
-        }
-        else
-            saida=1;
+        return meio;
     }
-    if(saida == 1)
-        cout << "valor encontrado!!!! posicão no vetor :  " << posicaoVector ;
+
+    if (vetor[meio] < chave){ 
+        return buscaBinaria(vetor, meio + 1, direito, chave); 
+    }
+    else{ 
+        return buscaBinaria(vetor, esquerdo, meio - 1, chave); 
+    }
+}
+
+int main()
+{
+    int k;
+    std::cout << "Digite o numero a ser pesquisado:\n";
+    std::cin >> k;
+    std::vector<int> vector = {1, 2, 4, 5, 6, 7, 8, 9, 0};
+
+    if (buscaBinaria(vector, 0, vector.size(), k) >= 0)
+    {
+        std::cout << "Encontrado" << std::endl;
+    }
     else
-        cout<<"valor não encontrado ";
+    {
+        std::cout << "Nao encontrado" << std::endl;
+    }
 
-
+    return 0;
 }
